@@ -22,7 +22,8 @@ class Arrowhead
   end
 
   def self.validate?(region, shape)
-    return valid_region?(CLASSIFICATIONS[region]) && valid_shape?(CLASSIFICATIONS[region][shape]) 
+    return valid_region?(CLASSIFICATIONS[region]) &&
+           valid_shape?(CLASSIFICATIONS[region][shape]) 
   end
 
   def self.valid_region?(region)
