@@ -4,15 +4,16 @@ class Robot
   @@registry ||= [] 
 
   def initialize(args = {})
-    naming_method = args[:name_generator] || self.method(:generate_name)
+    robot_namer = args[:name_generator] || self.method(:name_generator)
 
-    @name = naming_method.call
+    @name = robot_namer.call
+
     add_to_registry
   end
 
-  def generate_name
-    @name = "#{call_multiple(2, self.method(:generate_char))}" \
-            "#{call_multiple(3, self.method(:generate_num))}"
+  def name_generator
+    "#{call_multiple_times(2, self.method(:generate_letter))}" \
+      "#{call_multiple_times(3, self.method(:generate_digit))}"
   end
 
   def add_to_registry
@@ -23,25 +24,27 @@ class Robot
     @@registry << @name
   end
 
-  def call_multiple(number, lam)
+  def call_multiple_times(number, _lambda)
     string = ''
+
     number.times do |i|
-      string += lam.call
+      string += "#{_lambda.call}"
     end
 
     string
   end
 
-  def generate_char 
+  def generate_letter 
     ('A'..'Z').to_a.sample 
   end
 
-  def generate_num 
-    rand(10).to_s
+  def generate_digit 
+    rand(10)
   end 
   
   def name_collision?(name)
-    !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
+    !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) ||
+      @@registry.include?(name)
   end
 end
 
