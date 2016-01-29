@@ -10,8 +10,8 @@ However, math is hard. So, you're going to write the Rspec tests manually to mak
 
 1. The data set is a JSON file exported from the database (because Postgres does JSON now and someone went a little overboard). You'll need to parse the input file. However, make sure the data loading is abstracted from the main calculation code.
 2. For a given experiment, we're looking to calculate the conversion rate of visitors as part of a split test. We care about the following factors:
-  1. Total sample size and number of conversions for each cohort.
-  2. Conversion rate (including error bars) for each cohort with a 95% confidence.
+  1. Total sample size and number of conversions for each cohort.                     # enumerate and total
+  2. Conversion rate (including error bars) for each cohort with a 95% confidence.    # p% +/- ( 2 x Standard Error ) = 95% confidence range of p% accuracy
   3. Confidence level that the current leader is in fact better than random. You should use the Chi-square test for this, feel free to cheat with a [simple calculator](http://www.usereffect.com/split-test-calculator) to get your initial calculations. Feel free to use a gem to perform the calculations in your code; gems are good.
 
 ## Note
