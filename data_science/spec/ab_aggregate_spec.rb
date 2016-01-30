@@ -7,6 +7,8 @@ describe DataScience::ABAggregate do
       DataScience::ABAggregate.new
     end
 
+# should these be mocks?
+
     let!(:sample_result_A) do
       { date: '2014-03-20', cohort: 'A', result: 1 }
     end
@@ -62,6 +64,7 @@ describe DataScience::ABAggregate do
         empty_aggregate.add_result(sample_result_A)
         empty_aggregate.add_result(sample_result_B)
 
+        expect(false).to be(true), "These need to be refactored. (1) Why am I not just passing a cohort object? (2) The aggregate should take new cohorts in the initializer - leading to (3) should the cohorts be mocked?"
         expect(empty_aggregate.cohort_sample_size(sample_result_A[:cohort])).to eq(1)
         expect(empty_aggregate.cohort_sample_size(sample_result_B[:cohort])).to eq(1)
         expect(empty_aggregate.entire_sample_size).to eq(2)
